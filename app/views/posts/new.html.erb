@@ -1,0 +1,32 @@
+<h1>Create a New Post Form: </h1>
+
+<% if @post.errors.any? %>
+  <div id="error_explanation">
+    <h2>There were some errors: </h2>
+    <ul>
+      <% @post.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    </ul>
+  </div>
+<% end %>
+
+
+<%= form_tag posts_path do %>
+  <div class="field <%= 'field_with_errors' if @post.errors[:title].any? %>">
+    <label>Post Title: </label><br>
+    <%= text_field_tag "title", @post.title %><br>
+  </div>
+
+  <div class="field <%= 'field_with_errors' if @post.errors[:category].any? %>">
+    <label>Post Category: </label><br>
+    <%= text_field_tag "category", @post.category %><br>
+  </div>
+
+  <div class="field <%= 'field_with_errors' if @post.errors[:content].any? %>">
+    <label>Post Content: </label><br>
+    <%= text_area_tag "content", @post.content %><br>
+  </div>
+
+  <% submit_tag "Create a New Post" %>
+
+<% end %>
